@@ -58,7 +58,7 @@ class MainWindow(Frame):
             if answer:
                 self.save_file(path)
         else:
-            path = tkFileDialog.asksaveasfilename(defaultextension='.txt', title='Save file as')
+            path = tkFileDialog.asksaveasfilename(title='Save file as')
             if len(path) > 0:
                 self.save_file(path)
 
