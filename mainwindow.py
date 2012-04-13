@@ -10,7 +10,7 @@ class MainWindow(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
-        self.master.title('pyeditor')
+        self.set_title('pyeditor')
         self.master.geometry('800x600')
         self.open_files = []
         self.create_widgets()
@@ -50,6 +50,7 @@ class MainWindow(Frame):
         self.text_area.insert(1.0, contents)
         file.close()
         self.open_files.append((path, text.md5sum(contents)))
+        self.set_title(path)
 
 
     def show_save_dialog(self, event=None, path=None):
@@ -85,7 +86,12 @@ class MainWindow(Frame):
 
     def set_keyboard_shortcuts(self):
         self.master.bind('<Control-o>', self.show_open_dialog)
-        
+
+
+    def set_title(self, title):
+        self.master.title(title)
+
+
 
 
 def run():
