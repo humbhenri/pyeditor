@@ -1,4 +1,6 @@
 Complete Text Editor written in Python - Tkinter
 
 Features (so far):
-         * open, modify and save files
+* open, modify and save files
+* check before saving
+

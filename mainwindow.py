@@ -32,7 +32,7 @@ class MainWindow(Frame):
 
 
     def get_contents(self):
-        return self.text_area.get(1.0, END).strip()
+        return self.text_area.get(1.0, END)
 
 
     def save_file(self, path):
