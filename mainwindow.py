@@ -1,4 +1,4 @@
-from Tkinter import Tk, RIGHT, LEFT, Y, Text, END, Frame, Label, Scrollbar
+from Tkinter import Tk, RIGHT, LEFT, Y, Text, END, Frame, Label, Scrollbar, BOTH
 import text
 import tkFileDialog
 import tkMessageBox
@@ -9,8 +9,9 @@ class MainWindow(Frame):
     """
 
     def __init__(self, master=None):
-        Frame.__init__(self, master, width=800, height=600)
+        Frame.__init__(self, master)
         self.master.title('pyeditor')
+        self.master.geometry('800x600')
         self.open_files = []
         self.create_widgets()
         self.set_keyboard_shortcuts()
@@ -26,7 +27,7 @@ class MainWindow(Frame):
         s = Scrollbar(self.master)
         self.text_area.focus_set()
         s.pack(side=RIGHT, fill=Y)
-        self.text_area.pack(side=LEFT, fill=Y)
+        self.text_area.pack(expand=1, fill=BOTH)
         s.config(command=self.text_area.yview)
         self.text_area.config(yscrollcommand=s.set)
 
@@ -68,7 +69,7 @@ class MainWindow(Frame):
             path, md5sum = self.open_files[0]
             if md5sum != text.md5sum(contents):
                 self.show_save_dialog(path=path)
-        elif len(contents) > 0:
+        elif len(contents.strip()) > 0:
             self.show_save_dialog()
 
 
@@ -84,6 +85,7 @@ class MainWindow(Frame):
 
     def set_keyboard_shortcuts(self):
         self.master.bind('<Control-o>', self.show_open_dialog)
+        
 
 
 def run():
