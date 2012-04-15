@@ -49,7 +49,7 @@ class MainWindow(Frame):
         self.check_files_saved()
         self.current_buffer.filename = path
         self.current_buffer.load_file()
-        self.set_title(path)
+        self.set_title()
 
     def show_save_dialog(self):
         path = tkFileDialog.asksaveasfilename(title='Save file as')
@@ -65,15 +65,14 @@ class MainWindow(Frame):
     def show_open_dialog(self, event=None):
         path = tkFileDialog.askopenfilename(title='Open file')
         if len(path) > 0:
-            self.current_buffer.filename = path
-            self.current_buffer.load_file()
+            self.open_file(path)
 
     def set_keyboard_shortcuts(self):
         self.master.bind('<Control-o>', self.show_open_dialog)
         self.master.bind('<Control-s>', self.save_file)
 
-    def set_title(self, event):
-        self.master.title(self.current_buffer.filename + '*')
+    def set_title(self, event=None):
+        self.master.title(self.current_buffer.filename)
 
     def show_question(self, msg):
         return tkMessageBox.askyesno('pyeditor', msg)
