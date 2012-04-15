@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# coding: latin
 from Tkinter import Tk, RIGHT, LEFT, Y, Text, END, Frame, Label, Scrollbar, BOTH
 import text
 import tkFileDialog
@@ -45,9 +45,11 @@ class MainWindow(Frame):
             if len(filename) == 0:
                 return
             self.current_buffer.filename = filename
-        elif exiting and not self.show_question('Save file %s?' % self.current_buffer.filename):
-            return
-        self.current_buffer.save()
+            self.current_buffer.save()
+        elif exiting and \
+                self.current_buffer.is_modified() and \
+                self.show_question('Save file %s?' % self.current_buffer.filename):
+            self.current_buffer.save()
 
     def open_file(self, path):
         self.check_files_saved()

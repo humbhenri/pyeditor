@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+# coding: latin
 
 from Tkinter import *
 import text
@@ -38,6 +38,9 @@ class Buffer(object):
         file.close()
         self.textarea.delete(1.0, END)
         self.textarea.insert(1.0, contents)
-        self.md5 = text.md5sum(contents)
+        self.md5 = text.md5sum(contents + '\n')
+
+    def is_modified(self):
+        return (not self.filename is None) and self.md5 != text.md5sum(self.contents)
 
     contents = property(get_contents)
