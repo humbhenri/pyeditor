@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from Tkinter import *
 import text
 

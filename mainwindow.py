@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from Tkinter import Tk, RIGHT, LEFT, Y, Text, END, Frame, Label, Scrollbar, BOTH
 import text
 import tkFileDialog

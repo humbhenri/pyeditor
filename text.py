@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 # Text manipulation tools
 import md5
 
