@@ -12,7 +12,7 @@ class MainWindow(Frame):
 
     def __init__(self, master=None):
         Frame.__init__(self, master)
-        self.set_title('pyeditor')
+        self.master.title('pyeditor')
         self.master.geometry('640x480')
         self.buffers = []
         self.current_buffer = None
@@ -24,15 +24,9 @@ class MainWindow(Frame):
         self.create_text_area()
 
     def create_text_area(self):
-        self.text_area = Text(self.master, height=20, width=72)
-        s = Scrollbar(self.master)
-        self.text_area.focus_set()
-        s.pack(side=RIGHT, fill=Y)
-        self.text_area.pack(expand=1, fill=BOTH)
-        s.config(command=self.text_area.yview)
-        self.text_area.config(yscrollcommand=s.set)
-        self.buffers.append(Buffer(self.text_area))
-        self.current_buffer = self.buffers[0]
+        buffer = Buffer(self.master, modified_callback=self.set_title)
+        self.buffers.append(buffer)
+        self.current_buffer = buffer
 
     def get_contents(self):
         return self.current_buffer.contents.strip()
@@ -78,8 +72,8 @@ class MainWindow(Frame):
         self.master.bind('<Control-o>', self.show_open_dialog)
         self.master.bind('<Control-s>', self.save_file)
 
-    def set_title(self, title):
-        self.master.title(title)
+    def set_title(self, event):
+        self.master.title(self.current_buffer.filename + '*')
 
     def show_question(self, msg):
         return tkMessageBox.askyesno('pyeditor', msg)
