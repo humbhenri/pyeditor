@@ -37,8 +37,12 @@ class MainWindow(Frame):
         return self.current_buffer.contents.strip()
 
     def save_file(self, event=None, exiting=False):
-        if self.current_buffer.filename is None and len(self.get_contents()) > 0:
+        if len(self.get_contents()) == 0:
+            return
+        if self.current_buffer.filename is None:
             filename = self.show_save_dialog()
+            if len(filename) == 0:
+                return
             self.current_buffer.filename = filename
             self.current_buffer.save()
             return
